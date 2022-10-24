@@ -8,13 +8,21 @@ const Header = () => {
     const { user, logOut } = useContext(AuthContext)
     const [open, setOpen] = useState(false)
     const [profileView, setProfileView] = useState(false)
-    console.log(user)
+    const [isHovering, setIsHovering] = useState(false);
+    // console.log(isHovering)
 
     const handleLogOut = () => {
         logOut()
         setProfileView(!profileView)
     }
 
+    const handleMouseOver = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(false);
+    };
 
     return (
         <section className=''>
@@ -46,10 +54,12 @@ const Header = () => {
                                 <>
                                     {
                                         user?.photoURL ?
-                                            <Link onClick={() => setProfileView(!profileView)} className='order-first'>
+                                            <Link onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
+                                                onClick={() => setProfileView(!profileView)} className='order-first'>
                                                 <img className='rounded-full w-10 inline border-2 border-blue-600' src={user?.photoURL} alt="" />
                                             </Link> :
-                                            <Link onClick={() => setProfileView(!profileView)} className='order-first'>
+                                            <Link onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
+                                                onClick={() => setProfileView(!profileView)} className='order-first'>
                                                 <img className='rounded-full w-10 inline border-2 border-blue-600' src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
                                             </Link>
 
@@ -71,7 +81,7 @@ const Header = () => {
 
 
             {
-                user?.uid && <div className={`absolute top-14 right-8 w-56 ${profileView ? 'block' : 'hidden'}`}>
+                user?.uid && <div className={`absolute top-14 right-8 w-56 ${isHovering || profileView ? 'block' : 'hidden'}`}>
                     <div className='p-3 rounded-lg bg-green-200'>
                         <h1 className='text-2xl font-bold pt-1'>{user?.displayName}</h1>
                         <h1 className='pb-2'>{user?.email}</h1>
