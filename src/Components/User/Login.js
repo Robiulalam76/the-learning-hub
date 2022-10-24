@@ -1,6 +1,6 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthContext';
 import Swal from 'sweetalert2'
 
@@ -10,6 +10,8 @@ const Login = () => {
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,7 +22,7 @@ const Login = () => {
         loginWithEmailPassword(email, password)
             .then((result => {
                 const user = result.user
-                navigate('/')
+                navigate(from, { replace: true })
                 console.log(user);
             }))
             .catch((error) => {
@@ -41,6 +43,7 @@ const Login = () => {
                     'Your Account Seccessfully Created.',
                     'success'
                 )
+                navigate(from, { replace: true })
             }))
             .catch((error) => {
                 console.error(error);
@@ -56,6 +59,7 @@ const Login = () => {
                     'Your Account Seccessfully Created.',
                     'success'
                 )
+                navigate(from, { replace: true })
             }))
             .catch((error) => {
                 console.error(error);

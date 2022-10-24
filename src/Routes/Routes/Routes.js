@@ -8,6 +8,7 @@ import Login from "../../Components/User/Login";
 import Profile from "../../Components/User/Profile";
 import Register from "../../Components/User/Register";
 import Main from "../../Layout/Main";
+import PriveteRoute from "../PriveteRoute/PriveteRoute";
 
 const router = createBrowserRouter([
     {
@@ -19,12 +20,11 @@ const router = createBrowserRouter([
             { path: '/', element: <Home></Home> },
             { path: '/home', element: <Home></Home> },
             { path: '/courses', element: <Courses></Courses> },
-            { path: '/blog', element: <Blog></Blog> },
+            { path: '/blog', element: <PriveteRoute><Blog></Blog></PriveteRoute> },
             { path: '/about', element: <About></About> },
             { path: '/login', element: <Login></Login> },
             { path: '/register', element: <Register></Register> },
-            { path: '/profile', element: <Profile></Profile> },
-
+            { path: '/profile', element: <PriveteRoute><Profile></Profile></PriveteRoute> },
         ]
     }
 ])
