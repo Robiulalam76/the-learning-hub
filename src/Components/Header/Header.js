@@ -26,7 +26,7 @@ const Header = () => {
 
     return (
         <section className=''>
-            <nav className='bg-blue-100 py-2 px-4 md:px-8 relative'>
+            <nav className='bg-gradient-to-r from-rose-100 to-violet-100 py-2 px-4 md:px-8 relative'>
                 <div onClick={() => setOpen(!open)} className='text-blue-600 w-10 absolute right-4 md:right-14 md:hidden'>
                     {
                         open ? <XMarkIcon></XMarkIcon> : <Bars3Icon></Bars3Icon>
