@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
     return (
         <div>
-            <footer class="px-4 py-8 mx-auto max-w-7xl">
+            <footer class="px-4 py-8 mx-auto max-w-7xl mt-[150px] md:mt-12">
                 <div class="grid grid-cols-2 gap-10 mb-3 md:grid-cols-3 lg:grid-cols-12 lg:gap-20">
                     <div class="col-span-3">
                         <a href="/" title="Go to Kutty Home Page">

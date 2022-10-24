@@ -9,7 +9,11 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true)
 
-    const signUpWithGoogle = (provider) => {
+    const registerWithGoogle = (provider) => {
+        setLoading(true)
+        return signInWithPopup(auth, provider)
+    }
+    const registerWithGithub = (provider) => {
         setLoading(true)
         return signInWithPopup(auth, provider)
     }
@@ -55,7 +59,8 @@ const AuthProvider = ({ children }) => {
         user,
         loading,
         setLoading,
-        signUpWithGoogle,
+        registerWithGoogle,
+        registerWithGithub,
         registerWithEmailPassword,
         loginWithEmailPassword,
         updateUserProfile,

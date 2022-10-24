@@ -1,9 +1,14 @@
-import React, { useContext } from 'react';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../ContextAPI/AuthContext';
+import Swal from 'sweetalert2'
 
 const Login = () => {
-    const { user, loginWithEmailPassword } = useContext(AuthContext)
+    const { loginWithEmailPassword, registerWithGithub, registerWithGoogle } = useContext(AuthContext)
+    const [errorPassword, setPasswordError] = useState(false)
+    const githubProvider = new GithubAuthProvider();
+    const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
 
     const handleSubmit = (event) => {
@@ -19,22 +24,56 @@ const Login = () => {
                 console.log(user);
             }))
             .catch((error) => {
+                // const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorMessage) {
+                    setPasswordError(true)
+                }
+            })
+    }
+
+    const handleGithubRegister = () => {
+        registerWithGithub(githubProvider)
+            .then((result => {
+                const user = result.user
+                Swal.fire(
+                    'Congartulation!',
+                    'Your Account Seccessfully Created.',
+                    'success'
+                )
+            }))
+            .catch((error) => {
+                console.error(error);
+            })
+    }
+
+    const handleGooleRegister = () => {
+        registerWithGoogle(googleProvider)
+            .then((result => {
+                const user = result.user
+                Swal.fire(
+                    'Congartulation!',
+                    'Your Account Seccessfully Created.',
+                    'success'
+                )
+            }))
+            .catch((error) => {
                 console.error(error);
             })
     }
     return (
         <div className='flex justify-center my-12'>
 
-            <div className="flex flex-col w-[90%] md:w-[85%] max-w-md px-4 py-8 bg-white rounded-lg shadow-lg bg-gradient-to-r from-indigo-200 to-rose-300 sm:px-6 md:px-8 lg:px-10">
+            <div className="flex flex-col w-[90%] md:w-[85%] max-w-md px-4 py-8 bg-white rounded-lg shadow-lg shadow-gray-600 bg-gradient-to-r from-indigo-200 to-rose-300 sm:px-6 md:px-8 lg:px-10">
                 <div className="self-center font-bold mb-6 text-2xl md:text-4xl dark:text-blue-600">
                     Login
                 </div>
                 <div className="flex gap-4 item-center">
-                    <button type="button" className="py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                    <button onClick={handleGithubRegister} type="button" className="py-2 px-4 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                         <svg className='mr-2' stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
                         GitHub
                     </button>
-                    <button type="button" className="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                    <button onClick={handleGooleRegister} type="button" className="py-2 px-4 flex justify-center items-center  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                         <svg width="20" height="20" fill="currentColor" className="mr-2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                             <path d="M896 786h725q12 67 12 128 0 217-91 387.5t-259.5 266.5-386.5 96q-157 0-299-60.5t-245-163.5-163.5-245-60.5-299 60.5-299 163.5-245 245-163.5 299-60.5q300 0 515 201l-209 201q-123-119-306-119-129 0-238.5 65t-173.5 176.5-64 243.5 64 243.5 173.5 176.5 238.5 65q87 0 160-24t120-60 82-82 51.5-87 22.5-78h-436v-264z">
                             </path>
@@ -64,6 +103,9 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="flex items-center mb-6 -mt-4">
+                            {
+                                errorPassword && <p className='text-left font-semibold text-red-600'>Password is Wrong Try again</p>
+                            }
                             <div className="flex ml-auto">
                                 <Link className="inline-flex text-xs font-semibold sm:text-sm hover:text-blue-900">
                                     Forgot Your Password?

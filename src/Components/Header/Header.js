@@ -26,7 +26,7 @@ const Header = () => {
 
     return (
         <section className=''>
-            <nav className='bg-gradient-to-r from-rose-100 to-violet-100 py-2 px-4 md:px-8 relative'>
+            <nav className='bg-gradient-to-r from-indigo-800 via-purple-600 to-blue-300 py-2 px-4 md:px-8 relative'>
                 <div onClick={() => setOpen(!open)} className='text-blue-600 w-10 absolute right-4 md:right-14 md:hidden'>
                     {
                         open ? <XMarkIcon></XMarkIcon> : <Bars3Icon></Bars3Icon>
@@ -36,6 +36,7 @@ const Header = () => {
                 <div className='flex md:items-center md:justify-end flex-col md:flex-row items-start font-bold'>
                     <NavLink to='/home' className='flex-grow flex items-center font-bold text-2xl text-blue-600'> <img src="logo.png" className='w-44' alt="" /></NavLink>
                     <div className={`flex md:items-center md:justify-end flex-col md:flex-row items-start text-black font-bold ml-10 mt-3 md:m-0 md:block duration-500 ease-in ${open ? 'block' : 'hidden'}`}>
+
                         <NavLink to='/home'
                             className={({ isActive }) => isActive ?
                                 'underline underline-offset-4  decoration-2 text-rose-600 md:mr-10' : 'md:mr-10 hover:text-blue-700'}>Home</NavLink>

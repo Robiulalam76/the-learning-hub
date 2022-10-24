@@ -5,11 +5,11 @@ const ErrorPage = () => {
     return (
         <div>
             <main className="bg-white relative overflow-hidden h-screen relative">
-                <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32">
+                <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-4">
                     <div className="container mx-auto px-6 flex flex-col justify-between items-center relative">
-                        <div className="flex w-full items-center justify-center space-x-12 flex-col md:flex-row mb-16 md:mb-8">
+                        <div className="flex w-full items-center justify-center space-x-12 flex-col md:flex-row mb-8 md:mb-4">
                             <h1 className="font-bold text-center text-6xl text-gray-800">
-                                GOT LOST ?
+                                GOT LOST <span className='text-red-600 text-8xl'>?</span>
                             </h1>
                             <button className="px-3 py-2 font-bold transition ease-in duration-200 uppercase hover:bg-yellow-600 hover:text-white border-b text-2xl border-yellow-600 focus:outline-none">
                                 <Link className='text-blue-600' to='/'>Back To Home</Link>
