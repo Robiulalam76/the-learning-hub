@@ -8,8 +8,32 @@ const Register = () => {
     const { registerWithEmailPassword, updateUserProfile, registerWithGithub, registerWithGoogle } = useContext(AuthContext)
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
-    const [errorPassword, setPasswordError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
     const navigate = useNavigate()
+
+
+    // password secure message
+    const passwordSecure = (event) => {
+        event.preventDefault();
+        const password = event.target.value
+
+        // validate password
+        if (!/(?=.*[A-Z])/.test(password)) {
+            setPasswordError('at least 1 uppercase');
+            return;
+        }
+        if (password.length < 6) {
+            setPasswordError('at least 6 characters.');
+            return;
+        }
+        if (!/(?=.*[!@#$&*])/.test(password)) {
+            setPasswordError('1 special character');
+            return
+        }
+        else {
+            setPasswordError('Your Password Secure')
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,8 +57,12 @@ const Register = () => {
             }))
             .catch((error) => {
                 const errorMessage = error.message;
+                console.error(error)
                 if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
                     setPasswordError('Email Already in used')
+                }
+                if (errorMessage === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+                    setPasswordError('Password at least 6 characters')
                 }
             })
     }
@@ -130,12 +158,12 @@ const Register = () => {
                                 <span className="rounded-l-md inline-flex  items-center px-2 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
                                     <svg height="20" width="20" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><defs><clipPath><path fill="none" d="M124-288l388-672 388 672H124z" clip-rule="evenodd"></path></clipPath></defs><path d="M508 624a112 112 0 0 0 112-112c0-3.28-.15-6.53-.43-9.74L498.26 623.57c3.21.28 6.45.43 9.74.43zm370.72-458.44L836 122.88a8 8 0 0 0-11.31 0L715.37 232.23Q624.91 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 0 0 0 51.5q56.7 119.43 136.55 191.45L112.56 835a8 8 0 0 0 0 11.31L155.25 889a8 8 0 0 0 11.31 0l712.16-712.12a8 8 0 0 0 0-11.32zM332 512a176 176 0 0 1 258.88-155.28l-48.62 48.62a112.08 112.08 0 0 0-140.92 140.92l-48.62 48.62A175.09 175.09 0 0 1 332 512z"></path><path d="M942.2 486.2Q889.4 375 816.51 304.85L672.37 449A176.08 176.08 0 0 1 445 676.37L322.74 798.63Q407.82 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 0 0 0-51.5z"></path></svg>
                                 </span>
-                                <input type="password" name='password' className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter Your Password" required />
+                                <input onChange={passwordSecure} type="password" name='password' className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter Your Password" required />
                             </div>
                         </div>
                         <div className="flex items-center mb-6 -mt-4">
                             {
-                                errorPassword && <p className='text-left font-semibold text-red-600'>{errorPassword}</p>
+                                passwordError && <p className={`text-left font-semibold ${passwordError === 'Your Password Secure' ? 'text-green-600' : 'text-red-600'}`}>{passwordError}</p>
                             }
                             <div className="flex ml-auto">
 
