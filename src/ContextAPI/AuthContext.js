@@ -18,14 +18,15 @@ const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    const userEmailVerify = () => {
-        return sendEmailVerification(auth.currentUser)
-    }
-
     const loginWithEmailPassword = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
+
+    const userEmailVerify = () => {
+        return sendEmailVerification(auth.currentUser)
+    }
+
     const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile)
     }
