@@ -8,7 +8,7 @@ const Header = () => {
     const { user, logOut } = useContext(AuthContext)
     const [open, setOpen] = useState(false)
     const [profileView, setProfileView] = useState(false)
-    console.log(profileView)
+    console.log(user)
 
     const handleLogOut = () => {
         logOut()
