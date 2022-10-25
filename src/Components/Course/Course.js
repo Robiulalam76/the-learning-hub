@@ -1,23 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
-const CourseCard = ({ course }) => {
-    const { id, name, thumbnail, time, lesson, ratings, coursePrice, instructor } = course;
-    console.log(thumbnail);
+const Course = () => {
+    const courseDetails = useLoaderData()
+    const { id, name, thumbnail, time, lesson, ratings, coursePrice, instructor, details_info } = courseDetails;
+
     return (
         <div>
-            <div className="relative max-w-sm shadow-lg shadow-gray-400  shadow-lg rounded-lg mx-auto mt-4
-            bg-gradient-to-r from-indigo-100 via-purple-50 to-blue-100">
-                <img className="w-full rounded-t-lg h-44" src={thumbnail} alt="Sunset in the mountains" />
+            <div className="relative w-[96%] md:w-[65%] shadow-lg shadow-gray-400 shadow-lg rounded-lg mx-auto mt-12
+            bg-gradient-to-r from-indigo-200 via-purple-100 to-blue-200">
+                <img className="w-full rounded-t-lg h-36" src={thumbnail} alt="Sunset in the mountains" />
 
-                <div className='px-2'>
-                    <div className="py-4">
-                        <h1 className="font-extrabold text-blue-900 text-xl mb-2">{name}</h1>
-                        <p className="text-gray-800 text-base">
-                            {instructor}
-                        </p>
+                <div className='px-2 md:px-8'>
+                    <div className='flex justify-between items-center'>
+                        <div className="py-4">
+                            <h1 className="font-extrabold text-blue-900 text-xl mb-2">{name}</h1>
+                            <p className="text-gray-800 text-base">
+                                {instructor}
+                            </p>
+                        </div>
+                        <div className='flex flex-col md:flex-row items-center'>
+                            <Link>
+                                <button className='py-2 px-3 bg-blue-500 text-white font-bold my-4 mr-3'>Download PDF</button>
+                            </Link>
+                            <Link>
+                                <button className='py-2 text-center px-3 bg-violet-500 text-white font-bold'>Get Premium Access</button>
+                            </Link>
+                        </div>
                     </div>
-                    <div className='flex justify-between items-center my-4'>
+
+
+
+                    <div className='flex justify-between items-center my-4 w-96'>
                         <h1 className='font-extrabold text-rose-600 text-3xl'>${coursePrice}</h1>
                         <div className='flex justify-between items-center'>
 
@@ -43,9 +57,15 @@ const CourseCard = ({ course }) => {
                             </span>
                         </div>
                     </div>
+
+
+                    <div>
+                        <h1 className="font-extrabold text-blue-900 text-xl mb-2">Summery Of {name}</h1>
+                        <small>{details_info.description}</small>
+                    </div>
                 </div>
                 <div className="pt-8">
-                    <Link to={`/course/${id}`} className='absolute bottom-0 w-full'>
+                    <Link to='' className=''>
                         <button className='py-2 px-3 font-bold rounded-b-lg text-white w-full bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600 hover:bg-gradient-to-r hover:from-blue-900 hover:via-purple-800 hover:to-blue-900 
                         '>Course Details</button>
                     </Link>
@@ -55,4 +75,4 @@ const CourseCard = ({ course }) => {
     );
 };
 
-export default CourseCard;
+export default Course;
