@@ -6,8 +6,18 @@ const Course = () => {
     const { id, name, thumbnail, time, lesson, ratings, coursePrice, instructor, details_info } = courseDetails;
 
     return (
-        <div>
-            <div className="relative w-[96%] md:w-[65%] shadow-lg shadow-gray-400 shadow-lg rounded-lg mx-auto mt-12
+        <div className='w-[96%] md:w-[65%] mx-auto'>
+            <div className='flex justify-end items-center'>
+                <Link>
+                    {/* <button className='py-2 px-3 bg-blue-500 text-white font-bold my-4 mr-3'>Download PDF</button> */}
+                    <img className='w-36 h-[40px] my-4 mr-3 hover:border-2 hover:border-blue-600 rounded-[10px]' src="https://www.pngall.com/wp-content/uploads/2/Downloadable-PDF-Button-PNG-File.png" alt="" />
+                </Link>
+                <Link to={`/checkout/${id}`}>
+                    <button className='py-2 rounded-lg text-center px-3 bg-violet-500 text-white font-bold'>Get Premium Access</button>
+                </Link>
+            </div>
+
+            <div className="relative shadow-lg shadow-gray-400 shadow-lg rounded-lg mx-auto
             bg-gradient-to-r from-indigo-200 via-purple-100 to-blue-200">
                 <img className="w-full rounded-t-lg h-36" src={thumbnail} alt="Sunset in the mountains" />
 
@@ -18,14 +28,6 @@ const Course = () => {
                             <p className="text-gray-800 text-base">
                                 {instructor}
                             </p>
-                        </div>
-                        <div className='flex flex-col md:flex-row items-center'>
-                            <Link>
-                                <button className='py-2 px-3 bg-blue-500 text-white font-bold my-4 mr-3'>Download PDF</button>
-                            </Link>
-                            <Link>
-                                <button className='py-2 text-center px-3 bg-violet-500 text-white font-bold'>Get Premium Access</button>
-                            </Link>
                         </div>
                     </div>
 
