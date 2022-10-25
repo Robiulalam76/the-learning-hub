@@ -19,7 +19,11 @@ const router = createBrowserRouter([
 
             { path: '/', element: <Home></Home> },
             { path: '/home', element: <Home></Home> },
-            { path: '/courses', element: <Courses></Courses> },
+            {
+                path: '/courses',
+                loader: () => fetch('http://localhost:5000/courses'),
+                element: <Courses></Courses>
+            },
             { path: '/blog', element: <PriveteRoute><Blog></Blog></PriveteRoute> },
             { path: '/about', element: <About></About> },
             { path: '/login', element: <Login></Login> },
