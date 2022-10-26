@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { useReactToPrint } from "react-to-print";
+// import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
 
 
 const Course = () => {
@@ -12,33 +14,37 @@ const Course = () => {
         content: () => componentRef.current,
     });
 
+    const ref = React.createRef();
+
     return (
-        <div ref={componentRef} className='w-[96%] md:w-[65%] mx-auto'>
-            <div className='flex justify-end items-center'>
+        <div ref={ref} className='w-[96%] md:w-[55%] mx-auto'>
+            <div className='flex flex-col md:flex-row justify-center md:justify-end items-center mt-3'>
+                <Pdf targetRef={ref} filename="code-example.pdf">
+                    {({ toPdf }) => <button className='py-2 mr-1 hover:animate-none hover:bg-green-800 transition ease-in duration-500 rounded-lg text-center px-3 bg-violet-500 text-white font-bold' onClick={toPdf}>Direct Download</button>}
+                </Pdf>
                 <Link onClick={handlePrint}>
-                    <img className='w-36 h-[40px] my-4 mr-3 hover:border-2 hover:border-blue-600 rounded-[10px]' src="https://www.pngall.com/wp-content/uploads/2/Downloadable-PDF-Button-PNG-File.png" alt="" />
+                    <img className='w-40 animate-bounce hover:animate-none h-[40px] my-4 md:mr-3 hover:border-2 hover:border-blue-600 rounded-[10px]' src="https://www.pngall.com/wp-content/uploads/2/Downloadable-PDF-Button-PNG-File.png" alt="" />
                 </Link>
 
-                <Link to={`/checkout/${id}`}>
-                    <button className='py-2 rounded-lg text-center px-3 bg-violet-500 text-white font-bold'>Get Premium Access</button>
+                <Link to={`/checkout/course/${id}`}>
+                    <button className='py-2 hover:animate-none hover:bg-green-800 transition ease-in duration-500 rounded-lg text-center px-3 bg-violet-500 text-white font-bold'>Get Premium Access</button>
                 </Link>
             </div>
 
-            <div className="relative shadow-lg shadow-gray-400 shadow-lg rounded-lg mx-auto
+            <div ref={componentRef} className="relative mt-4 shadow-lg shadow-gray-400 shadow-lg rounded-lg mx-auto
             bg-gradient-to-r from-indigo-200 via-purple-100 to-blue-200">
-                <img className="w-full rounded-t-lg h-36" src={thumbnail} alt="Sunset in the mountains" />
+                <img className="w-full rounded-t-lg h-48" src={thumbnail} alt="Sunset in the mountains" />
 
                 <div className='px-2 md:px-8'>
                     <div className='flex justify-between items-center'>
                         <div className="py-4">
-                            <h1 className="font-extrabold text-blue-900 text-xl mb-2">{name}</h1>
+                            <h1 className="font-extrabold text-blue-900 text-4xl mb-2">{name}</h1>
+                            <h1 className="font-bold text-1xl">Instructor</h1>
                             <p className="text-gray-800 text-base">
                                 {instructor}
                             </p>
                         </div>
                     </div>
-
-
 
                     <div className='flex justify-between items-center my-4 w-96'>
                         <h1 className='font-extrabold text-rose-600 text-3xl'>${coursePrice}</h1>
@@ -76,8 +82,18 @@ const Course = () => {
 
 
                     <div>
-                        <h1 className="font-extrabold text-blue-900 text-xl mb-2">Summery Of {name}</h1>
+                        <h1 className="font-extrabold text-blue-900 text-xl mb-1">Description</h1>
+                        <hr className='border-blue-600 mb-1' />
                         <small>{details_info.description}</small>
+                    </div>
+                    <div>
+                        <h1 className="font-extrabold text-blue-900 text-xl mt-3">Topics List</h1>
+                        {
+                            details_info.topics.map(tp => <li
+                                className='font-semibold'>
+                                {tp}
+                            </li>)
+                        }
                     </div>
                 </div>
                 <div className="pt-8">
@@ -87,6 +103,50 @@ const Course = () => {
                     </Link>
                 </div>
             </div>
+
+            <div className="flex flex-col my-12 p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-900 dark:text-gray-100">
+                <div className="flex flex-col items-center w-full">
+                    <h2 className="text-3xl font-semibold text-center">Your opinion matters!</h2>
+                    <div className="flex flex-col items-center py-6 space-y-3">
+                        <span className="text-center">How was your experience?</span>
+                        <div className="flex space-x-3">
+                            <button type="button" title="Rate 1 stars" aria-label="Rate 1 stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                            </button>
+                            <button type="button" title="Rate 2 stars" aria-label="Rate 2 stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                            </button>
+                            <button type="button" title="Rate 3 stars" aria-label="Rate 3 stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                            </button>
+                            <button type="button" title="Rate 4 stars" aria-label="Rate 4 stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-yellow-500">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                            </button>
+                            <button type="button" title="Rate 5 stars" aria-label="Rate 5 stars">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-10 h-10 dark:text-gray-600">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="flex flex-col w-full">
+                        <textarea rows="3" placeholder="Message..." className="p-4 border rounded-md resize-none dark:text-gray-100 dark:bg-gray-900"></textarea>
+                        <button type="button" className="py-4 my-8 font-semibold rounded-md dark:text-gray-900 dark:bg-violet-400">Leave feedback</button>
+                    </div>
+                </div>
+                <div className="flex items-center justify-center">
+                    <a rel="noopener noreferrer" href="#" className="text-sm dark:text-gray-400">Maybe later</a>
+                </div>
+            </div>
+
         </div>
     );
 };

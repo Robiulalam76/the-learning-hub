@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CourseCard = ({ course }) => {
     const { id, name, thumbnail, time, lesson, ratings, coursePrice, instructor } = course;
-    console.log(thumbnail);
+    // console.log(thumbnail);
     return (
         <div>
             <div className="relative max-w-sm shadow-lg shadow-gray-400  shadow-lg rounded-lg mx-auto mt-4
@@ -12,7 +12,8 @@ const CourseCard = ({ course }) => {
 
                 <div className='px-2'>
                     <div className="py-4">
-                        <h1 className="font-extrabold text-blue-900 text-xl mb-2">{name}</h1>
+                        <h1 className="font-extrabold text-blue-900 text-3xl mb-2">{name}</h1>
+                        <h1 className="font-bold text-1xl">Instructor</h1>
                         <p className="text-gray-800 text-base">
                             {instructor}
                         </p>

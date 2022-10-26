@@ -5,6 +5,7 @@ import Checkout from "../../Components/Checkout/Checkout";
 import Course from "../../Components/Course/Course";
 import Courses from "../../Components/Courses/Courses";
 import ErrorPage from "../../Components/ErrorPage/ErrorPage";
+import Faq from "../../Components/Faq/Faq";
 import Home from "../../Components/Home/Home";
 import Login from "../../Components/User/Login";
 import Profile from "../../Components/User/Profile";
@@ -23,19 +24,20 @@ const router = createBrowserRouter([
             { path: '/home', element: <Home></Home> },
             {
                 path: '/courses',
-                loader: () => fetch('http://localhost:5000/courses'),
+                loader: () => fetch('https://the-learning-hub-server-robiulalam76.vercel.app/courses'),
                 element: <Courses></Courses>
             },
             {
                 path: '/course/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`),
+                loader: ({ params }) => fetch(`https://the-learning-hub-server-robiulalam76.vercel.app/course/${params.id}`),
                 element: <Course></Course>
             },
             {
-                path: '/checkout/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/course/checkout/${params.id}`),
+                path: '/checkout/course/:id',
+                loader: ({ params }) => fetch(`https://the-learning-hub-server-robiulalam76.vercel.app/checkout/course/${params.id}`),
                 element: <PriveteRoute><Checkout></Checkout></PriveteRoute>
             },
+            { path: '/faq', element: <Faq></Faq> },
             { path: '/blog', element: <PriveteRoute><Blog></Blog></PriveteRoute> },
             { path: '/about', element: <About></About> },
             { path: '/login', element: <Login></Login> },

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo/logo.png'
 
 const Footer = () => {
     return (
@@ -8,7 +9,7 @@ const Footer = () => {
                 <div class="grid grid-cols-2 gap-10 mb-3 md:grid-cols-3 lg:grid-cols-12 lg:gap-20">
                     <div class="col-span-3">
                         <Link to='/' title="Go to The Learning Hub Home Page">
-                            <img src="logo.png" alt="" />
+                            <img src={logo} alt="" />
                         </Link>
                         <p class="my-4 text-xs leading-normal text-gray-500">
                             Bring together your discussions, memberships, and content. Integrate a thriving community wherever your audience is, all under your own brand.
@@ -56,7 +57,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div class="flex flex-col items-start justify-between pt-10 mt-10 border-t border-gray-100 md:flex-row md:items-center">
-                    <p class="mb-6 text-sm text-left text-gray-600 md:mb-0">© Copyright 2020 Skcript. All Rights Reserved.</p>
+                    <p class="mb-6 text-sm text-left text-gray-600 md:mb-0">© Copyright 2022 The Learning Hub. All Rights Reserved.</p>
                     <div class="flex items-start justify-start space-x-6 md:items-center md:justify-center">
                         <a href="#" class="text-sm text-gray-600 transition hover:text-primary">Terms</a>
                         <a href="#" class="text-sm text-gray-600 transition hover:text-primary">Privacy</a>
