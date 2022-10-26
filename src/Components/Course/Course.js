@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import { useReactToPrint } from "react-to-print";
+
 
 const Course = () => {
     const courseDetails = useLoaderData()
     const { id, name, thumbnail, time, lesson, ratings, coursePrice, instructor, details_info } = courseDetails;
 
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
+
     return (
-        <div className='w-[96%] md:w-[65%] mx-auto'>
+        <div ref={componentRef} className='w-[96%] md:w-[65%] mx-auto'>
             <div className='flex justify-end items-center'>
-                <Link>
-                    {/* <button className='py-2 px-3 bg-blue-500 text-white font-bold my-4 mr-3'>Download PDF</button> */}
+                <Link onClick={handlePrint}>
                     <img className='w-36 h-[40px] my-4 mr-3 hover:border-2 hover:border-blue-600 rounded-[10px]' src="https://www.pngall.com/wp-content/uploads/2/Downloadable-PDF-Button-PNG-File.png" alt="" />
                 </Link>
+
                 <Link to={`/checkout/${id}`}>
                     <button className='py-2 rounded-lg text-center px-3 bg-violet-500 text-white font-bold'>Get Premium Access</button>
                 </Link>
