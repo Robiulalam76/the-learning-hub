@@ -1,6 +1,18 @@
-# Name: [<img src="titleLogo.jpeg" width="40" height="20"/>](logo.png) The Learning Hub
+# [<img src="logo.png" width="40" height="20"/>](logo.png) The Learning Hub
+The Learning Hub Website is an education website.  All students from all over the world can acquire knowledge of programming language through the course on our website.
 
 # Website Details
+The Learning Hub Website is an education website.  All students from all over the world can acquire knowledge of programming language through the course on our website.
+[<img src="navbar.png" />](navbar.png)
+- At the beginning of the website there is a header which contains the website logo and some routes.  home, courses, faq, blog, about, profile.
+- When the user visits the website he will be shown the home page and some titles are given on the home page.
+- Clicking on the courses option will take you to the course page, there will be many types of courses related to programming. page will have two parts a side bar and a course cards.
+- Clicking the course details button on each course card will take him to the course details page.  The details of the selected course will be given there.
+- If you chose the course details on the course details page, clicking the Get Premium Access button will take you to the checkout page.  If you have an account login.  If you are not logged in, you must login
+- The faq and about pages provide some information about the website.
+- Some programming language questions are answered on the block page
+- Shows login if user is not logged in and profile photo if logged in.  Clicking on the profile will take you to the profile page.
+
 
 
 

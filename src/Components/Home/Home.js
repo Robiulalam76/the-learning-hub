@@ -15,7 +15,7 @@ const Home = () => {
                                 Welcome To Our <span className='text-pink-600'>The Learning Hub</span>
                             </h1>
                             <p className="text-sm sm:text-base text-gray-700 dark:text-white text-center md:text-left mt-3">
-                                Dimension of reality that makes change possible and understandable. An indefinite and homogeneous environment in which natural events and human existence take place.
+                                The Learning Hub Website is an education website.  All students from all over the world can acquire knowledge of programming language through the course on our website.
                             </p>
                             <div className="flex mt-8">
                                 <Link to='/courses' className="uppercase py-2 px-4 rounded-lg bg-pink-500 border-2 text-white text-md mr-4 hover:bg-pink-400">
