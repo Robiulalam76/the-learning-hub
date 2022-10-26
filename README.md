@@ -1,7 +1,7 @@
 # [<img src="logo.png" width="40" height="20"/>](logo.png) The Learning Hub
 The Learning Hub Website is an education website.  All students from all over the world can acquire knowledge of programming language through the course on our website.
 
-# Website Details
+## Website Details
 The Learning Hub Website is an education website.  All students from all over the world can acquire knowledge of programming language through the course on our website.
 [<img src="navbar.png" />](navbar.png)
 - At the beginning of the website there is a header which contains the website logo and some routes.  home, courses, faq, blog, about, profile.
@@ -13,16 +13,16 @@ The Learning Hub Website is an education website.  All students from all over th
 - Some programming language questions are answered on the block page
 - Shows login if user is not logged in and profile photo if logged in.  Clicking on the profile will take you to the profile page.
 
-
-
-
 ## Live Site: 
-- 
+- https://the-learning-hub-b3af3.web.app/
 
 ## Repository Link:
-- 
+1. Client Site: https://github.com/programming-hero-web-course1/b610-learning-platform-client-side-Robiulalam76
+
+2. Server Site: https://github.com/programming-hero-web-course1/b610-lerning-platform-server-side-Robiulalam76
+
 ## Git Clone:
-- 
+- https://github.com/programming-hero-web-course1/b610-learning-platform-client-side-Robiulalam76.git
 
 
 
