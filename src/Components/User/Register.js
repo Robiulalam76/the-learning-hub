@@ -45,19 +45,20 @@ const Register = () => {
 
         registerWithEmailPassword(email, password)
             .then((result => {
-                const user = result.user
+                // const user = result.user
                 updateProfile(name, photoURL)
-                console.log(user);
+                // console.log(user);
+                navigate('/login')
                 Swal.fire(
                     'Email Varification!',
                     'Please Check Your Email Address and Varify Your Email.',
                     'success'
                 )
-                FormData.reset()
+
             }))
             .catch((error) => {
                 const errorMessage = error.message;
-                console.error(error)
+                // console.error(error)
                 if (errorMessage === 'Firebase: Error (auth/email-already-in-use).') {
                     setPasswordError('Email Already in used')
                 }
@@ -75,7 +76,7 @@ const Register = () => {
     const handleGithubRegister = () => {
         registerWithGithub(githubProvider)
             .then((result => {
-                const user = result.user
+                // const user = result.user
                 Swal.fire(
                     'Congartulation!',
                     'Your Account Seccessfully Created.',
@@ -84,7 +85,7 @@ const Register = () => {
                 navigate('/login')
             }))
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
             })
     }
 
@@ -100,7 +101,7 @@ const Register = () => {
                 navigate('/login')
             }))
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
             })
     }
 

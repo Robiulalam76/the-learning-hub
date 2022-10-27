@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 const Login = () => {
     const { loginWithEmailPassword, registerWithGithub, registerWithGoogle } = useContext(AuthContext)
-    const [errorPassword, setPasswordError] = useState(false)
+    const [errorPassword, setPasswordError] = useState("")
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
     const navigate = useNavigate()
@@ -28,8 +28,12 @@ const Login = () => {
             .catch((error) => {
                 // const errorCode = error.code;
                 const errorMessage = error.message;
-                if (errorMessage) {
-                    setPasswordError(true)
+                console.log(errorMessage);
+                if (errorMessage === "Firebase: Error (auth/wrong-password).") {
+                    setPasswordError("Password is Wrong Try again")
+                }
+                if (errorMessage === "Firebase: Error (auth/user-not-found).") {
+                    setPasswordError('User is Not Found')
                 }
             })
     }
@@ -37,7 +41,7 @@ const Login = () => {
     const handleGithubRegister = () => {
         registerWithGithub(githubProvider)
             .then((result => {
-                const user = result.user
+                // const user = result.user
                 Swal.fire(
                     'Congartulation!',
                     'Your Account Seccessfully Created.',
@@ -46,14 +50,14 @@ const Login = () => {
                 navigate(from, { replace: true })
             }))
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
             })
     }
 
     const handleGooleRegister = () => {
         registerWithGoogle(googleProvider)
             .then((result => {
-                const user = result.user
+                // const user = result.user
                 Swal.fire(
                     'Congartulation!',
                     'Your Account Seccessfully Created.',
@@ -62,7 +66,7 @@ const Login = () => {
                 navigate(from, { replace: true })
             }))
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
             })
     }
     return (
@@ -108,7 +112,7 @@ const Login = () => {
                         </div>
                         <div className="flex items-center mb-6 -mt-4">
                             {
-                                errorPassword && <p className='text-left font-semibold text-red-600'>Password is Wrong Try again</p>
+                                errorPassword && <p className='text-left font-semibold text-red-600'>{errorPassword}</p>
                             }
                             <div className="flex ml-auto">
                                 <Link className="inline-flex text-xs font-semibold sm:text-sm hover:text-blue-900">

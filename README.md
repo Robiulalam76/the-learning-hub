@@ -12,6 +12,7 @@ The Learning Hub Website is an education website.  All students from all over th
 - The faq and about pages provide some information about the website.
 - Some programming language questions are answered on the block page
 - Shows login if user is not logged in and profile photo if logged in.  Clicking on the profile will take you to the profile page.
+- Firebase, Tailwind CSS, hero icons, and express js are used in the website.
 
 ## Live Site: 
 - https://the-learning-hub-b3af3.web.app/

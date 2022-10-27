@@ -20,7 +20,13 @@ const Course = () => {
         <div className='w-[96%] md:w-[55%] mx-auto'>
             <div className='flex flex-col md:flex-row justify-center md:justify-end items-center mt-3'>
                 <Pdf targetRef={ref} filename="code-example.pdf">
-                    {({ toPdf }) => <button className='py-2 mr-1 hover:animate-none hover:bg-green-800 transition ease-in duration-500 rounded-lg text-center px-3 bg-violet-500 text-white font-bold' onClick={toPdf}>Direct Download</button>}
+                    {({ toPdf }) =>
+                        <button onClick={toPdf} class="bg-gray-500 mr-3 hover:bg-gray-600 transition ease-in duration-500 text-gray-900 font-bold py-2 px-4 rounded inline-flex items-center">
+                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
+                            <span>Direct Download</span>
+                        </button>
+                    }
+
                 </Pdf>
                 <Link onClick={handlePrint}>
                     <img className='w-40 animate-bounce hover:animate-none h-[40px] my-4 md:mr-3 hover:border-2 hover:border-blue-600 rounded-[10px]' src="https://www.pngall.com/wp-content/uploads/2/Downloadable-PDF-Button-PNG-File.png" alt="" />
@@ -97,15 +103,15 @@ const Course = () => {
                             }
                         </div>
                     </div>
-                    <div className="pt-8">
-                        <Link to='/courses' className=''>
-                            <button className='py-2 px-3 font-bold rounded-b-lg text-white w-full bg-gradient-to-r from-blue-600 via-purple-500 to-blue-600 hover:bg-gradient-to-r hover:from-blue-900 hover:via-purple-800 hover:to-blue-900 
-                        '>Back To Course Page</button>
+                    <div className="flex justify-center p-8">
+                        <Link to={`/checkout/course/${id}`}>
+                            <button className='py-2 px-6 hover:animate-none hover:bg-green-800 transition ease-in duration-500 rounded-lg text-center bg-violet-500 text-white font-bold'>Get Premium Access</button>
                         </Link>
                     </div>
                 </div>
             </div>
-
+            <div class="flex spac-x-2 justify-center">
+            </div>
             <div className="flex flex-col my-12 p-8 shadow-sm rounded-xl lg:p-12 dark:bg-gray-900 dark:text-gray-100">
                 <div className="flex flex-col items-center w-full">
                     <h2 className="text-3xl font-semibold text-center">Your opinion matters!</h2>
