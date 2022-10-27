@@ -74,8 +74,8 @@ const Header = () => {
                             className={({ isActive }) => isActive ?
                                 'mt-3 underline underline-offset-4 decoration-2 text-rose-700 md:mr-10' : 'md:mr-10 mt-3 hover:text-blue-700'}>About</NavLink>
                         {
-                            user?.uid && <NavLink onClick={() => handleLogOut()} className='md:hidden mt-3'>
-                                <button type="button" class="inline-block px-4 py-1.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Log out</button>
+                            user?.uid && <NavLink onClick={() => setOpen(!open)} className='md:hidden mt-3'>
+                                <button onClick={() => handleLogOut()} type="button" class="inline-block px-4 py-1.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Log out</button>
                             </NavLink>
                         }
 
